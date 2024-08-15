@@ -1,34 +1,32 @@
 import 'dart:io';
-double media = 0;
 
 void main() {
-  double a, b, c, d, mediaInterna;
+  List<String> notasInput = stdin.readLineSync()!.split(' ');
+  double n1 = double.parse(notasInput[0]);
+  double n2 = double.parse(notasInput[1]);
+  double n3 = double.parse(notasInput[2]);
+  double n4 = double.parse(notasInput[3]);
 
-  List<String> valoresStr = stdin.readLineSync().toString().split(' ');
-  List<double> valores = valoresStr.map(double.parse).toList();
-  a = valores[0];
-  b = valores[1];
-  c = valores[2];
-  d = valores[3];
+  double media = ((n1 * 2) + (n2 * 3) + (n3 * 4) + (n4 * 1))/10;
 
-  mediaInterna = valores.reduce((valor, elemento) => valor + elemento)/4;
-  print("Media: $mediaInterna");
+  print("Media: " + media.toStringAsFixed(1));
 
-  switch (mediaInterna) {
-    case < 5:
-      print("Aluno reprovado.");
-      exit(0);
-    case >= 5 && < 8:
-      print("Aluno em exame.");
-      double notaExame = double.parse(stdin.readLineSync().toString());
-      if (notaExame >= 5) {
-        print("Nota do exame: $notaExame");
-        print("Aluno aprovado.");
-        media = (media + notaExame)/2;
-        print("Media final: $media");
-      }
-    default:
+  if (media >= 7) {
+    print("Aluno aprovado.");
+  } else if (media >= 5) {
+    print("Aluno em exame.");
+
+    double nExame = double.parse(stdin.readLineSync().toString());
+    print("Nota do exame: " + nExame.toStringAsFixed(1));
+
+    if (nExame >= 5) {
       print("Aluno aprovado.");
+    }
+
+    double mediaFinal = (media + nExame)/2;
+    print("Media final: " + mediaFinal.toStringAsFixed(1));
+  } else {
+    print("Aluno reprovado.");
   }
 
 }
